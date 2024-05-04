@@ -1,0 +1,30 @@
+<?php
+// Ambil ID yang akan dihapus dari data yang dikirimkan melalui metode POST
+$idToDelete = $_POST['id'];
+
+// Baca data yang sudah ada dari file JSON dan simpan dalam variabel $data
+$data = json_decode(file_get_contents('data.json'), true);
+
+// Inisialisasi variabel untuk menandai apakah data berhasil dihapus atau tidak
+$deleted = false;
+
+// Loop melalui setiap item dalam data
+foreach ($data as $key => $item) {
+	
+	// Jika ID item saat ini cocok dengan ID yang akan dihapus
+    if ($item['id'] === $idToDelete) {
+		
+		// Hapus item dari array data menggunakan unset()
+        unset($data[$key]);
+		
+		// Set variabel $deleted menjadi true untuk menandai bahwa data berhasil dihapus
+        $deleted = true;
+    }
+}
+
+// Tulis kembali data yang sudah diperbarui ke dalam file JSON
+file_put_contents('data.json', json_encode(array_values($data)));
+
+// Redirect pengguna kembali ke halaman utama (index.phtml) setelah proses selesai
+header("Location: index.phtml");
+?>

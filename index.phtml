@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD dengan JSON Database</title>
+	
+	<!-- Import Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+	<!-- //Import Tailwind CSS -->
+	
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-12">
+    
+	<!-- Judul -->
+	<h1 class="text-3xl font-bold py-12">CRUD + JSON Database</h1>
+	<!-- //Judul -->
+	
+    <div class="w-1/2 bg-white px-6 py-12 rounded-lg shadow-md">
+	
+		<!-- Menu Tab -->
+        <ul class="flex mb-4 justify-center pb-12">
+			<li class="mr-4">
+				<a href="#" id="read-tab" class="tab py-2 px-4 bg-emerald-500 text-white rounded-md hover:bg-emerald-600">Read</a>
+			</li>
+			<li class="mr-4">
+				<a href="#" id="create-tab" class="tab py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create</a>
+			</li>
+			<li class="mr-4">
+				<a href="#" id="update-tab" class="tab py-2 px-4 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Update</a>
+			</li>
+			<li>
+				<a href="#" id="delete-tab" class="tab py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600">Delete</a>
+			</li>
+		</ul>
+		<!-- //Menu Tab -->
+		
+		<!-- Bagian Read -->
+		<div id="read" class="tab-content">
+            <h2 class="text-xl text-center bg-emerald-500 text-white py-2 font-semibold mb-6">Read (Baca)</h2>
+            <?php include 'read.phtml'; ?>
+        </div>
+		<!-- //Bagian Read -->
+		
+		<!-- Bagian Create -->
+        <div id="create" class="tab-content hidden">
+            <h2 class="text-xl text-center bg-blue-500 text-white py-2 font-semibold mb-6">Create (Buat)</h2>
+            <form action="create.phtml" method="POST" class="mb-4">
+                <div class="flex flex-col mb-4">
+                    <label for="name" class="mb-1">Nama:</label>
+                    <input type="text" id="name" name="name" class="px-3 py-2 border rounded-md">
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="price" class="mb-1">Harga:</label>
+                    <input type="number" id="price" name="price" class="px-3 py-2 border rounded-md">
+                </div>
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Create</button>
+            </form>
+        </div>
+		<!-- //Bagian Create -->
+		
+		<!-- Bagian Update -->
+        <div id="update" class="tab-content hidden">
+            <h2 class="text-xl text-center font-semibold bg-yellow-500 text-white py-2 mb-6">Update (Perbarui)</h2>
+            <form action="update.phtml" method="POST" class="mb-4">
+                <div class="flex flex-col mb-4">
+                    <label for="id" class="mb-1">ID Data yang ingin diperbarui:</label>
+                    <input type="text" id="id" name="id" class="px-3 py-2 border rounded-md">
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="name" class="mb-1">Nama Baru:</label>
+                    <input type="text" id="name" name="name" class="px-3 py-2 border rounded-md">
+                </div>
+                <div class="flex flex-col mb-4">
+                    <label for="price" class="mb-1">Harga Baru:</label>
+                    <input type="number" id="price" name="price" class="px-3 py-2 border rounded-md">
+                </div>
+                <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-green-600">Update</button>
+            </form>
+        </div>
+		<!-- //Bagian Update -->
+	
+		<!-- Bagian Delete -->
+        <div id="delete" class="tab-content hidden">
+            <h2 class="text-xl text-center font-semibold bg-red-500 text-white py-2 mb-6">Delete (Hapus)</h2>
+            <form action="delete.phtml" method="POST" class="mb-4">
+                <div class="flex flex-col mb-4">
+                    <label for="id" class="mb-1">ID Data yang ingin dihapus:</label>
+                    <input type="text" id="id" name="id" class="px-3 py-2 border rounded-md">
+                </div>
+                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">Delete</button>
+            </form>
+        </div>
+		<!-- //Bagian Delete -->
+		
+    </div>
+	
+	<!-- Aktifkan Tabs -->
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                tabContents.forEach(content => content.classList.add('hidden'));
+                const targetContentId = tab.getAttribute('id').replace('-tab', '');
+                document.getElementById(targetContentId).classList.remove('hidden');
+            });
+        });
+    </script>
+	<!-- //Aktifkan Tabs -->
+</body>
+</html>

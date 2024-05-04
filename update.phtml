@@ -1,0 +1,30 @@
+<?php
+// Ambil ID dari data POST
+$idToUpdate = $_POST['id'];
+
+// Persiapkan data baru yang akan diperbarui
+$newData = array(
+    "name" => $_POST['name'], // Ambil nilai "name" dari form
+    "price" => $_POST['price'] // Ambil nilai "price" dari form
+);
+
+// Baca data dari file JSON dan simpan dalam variabel $data
+$data = json_decode(file_get_contents('data.json'), true);
+
+// Loop melalui setiap item dalam data
+foreach ($data as &$item) {
+	
+	// Jika ID item saat ini cocok dengan ID yang akan diperbarui
+    if ($item['id'] === $idToUpdate) {
+		
+		// Gabungkan data baru ke dalam item yang sesuai menggunakan fungsi array_merge()
+        $item = array_merge($item, $newData);
+    }
+}
+
+// Tulis kembali data yang sudah diperbarui ke dalam file JSON
+file_put_contents('data.json', json_encode($data));
+
+// Redirect pengguna kembali ke halaman utama (index.phtml) setelah proses selesai
+header("Location: index.phtml");
+?>

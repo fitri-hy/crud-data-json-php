@@ -1,0 +1,21 @@
+<?php
+//Buat array data baru
+$newData = array(
+    "id" => uniqid(), // Buat ID
+    "name" => $_POST['name'], // Ambil nilai "name" dari form
+    "price" => $_POST['price'] // Ambil nilai "price" dari form
+);
+// <-Buat array data baru
+
+// Baca data yang sudah ada
+$data = json_decode(file_get_contents('data.json'), true);
+
+// Tambah data baru ke dalam array $data
+$data[] = $newData;
+
+// Tulis kembali data ke file JSON
+file_put_contents('data.json', json_encode($data));
+
+// Redirect ke index.phtml
+header("Location: index.phtml");
+?>
