@@ -1,4 +1,4 @@
-# Crud Data Json PHP 
+# Crud Data Json .PHTML
 Proyek CRUD PHP+HTML (.phtml) sederhana yang menggunakan JSON sebagai databasenya & Tailwind CSS untuk mempercantik tampilannya.
 
 Cocok untuk kamu yang ingin mempelajari operasi CRUD (Create, Read, Update, & Delete)
